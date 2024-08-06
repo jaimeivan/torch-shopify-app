@@ -19,13 +19,13 @@ export const links = () => [{ rel: "stylesheet", href: polarisStyles }];
 
 export const loader = async ({ request }) => {
   const errors = loginErrorMessage(await login(request));
-
+  console.log('--AUTH-02--')
   return json({ errors, polarisTranslations });
 };
 
 export const action = async ({ request }) => {
   const errors = loginErrorMessage(await login(request));
-
+  console.log('--AUTH-03--')
   return json({
     errors,
   });
@@ -36,7 +36,7 @@ export default function Auth() {
   const actionData = useActionData();
   const [shop, setShop] = useState("");
   const { errors } = actionData || loaderData;
-
+  console.log('--AUTH-04--')
   return (
     <PolarisAppProvider i18n={loaderData.polarisTranslations}>
       <Page>

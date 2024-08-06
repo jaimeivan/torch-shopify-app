@@ -1,6 +1,30 @@
 query RunInput {
+  cart {
+    lines {
+      id
+      quantity
+      merchandise {
+        __typename
+        ... on CustomProduct {
+          weight
+        }
+        ... on ProductVariant {
+          weight
+        }
+      }
+    }
+    deliveryGroups {
+      deliveryAddress {
+        provinceCode
+      }
+      deliveryOptions {
+        handle
+        title
+      }
+    }
+  }
   deliveryCustomization {
-    metafield(namespace: "$app:torch-delivery-custom", key: "function-configuration") {
+    metafield(namespace: "delivery-customization", key: "function-configuration") {
       value
     }
   }

@@ -1,9 +1,13 @@
 import axios from "axios";
 import { json } from "@remix-run/node";
-import { useLoaderData, Link, useNavigate } from "@remix-run/react";
+import { 
+  Link,
+  useLoaderData, 
+  useNavigate, 
+  useFetcher } from "@remix-run/react";
 import { Modal, TitleBar, useAppBridge } from '@shopify/app-bridge-react';
 import { authenticate } from "../../shopify.server";
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import {
   Card,
   EmptyState,
@@ -21,11 +25,13 @@ import {
   useBreakpoints,
   Divider,
   Button,
+  ButtonGroup,
   Form, 
   FormLayout,
+  InlineError,
+  Spinner,
 } from "@shopify/polaris";
 
-//import db from "../../db.server";
 import { getTorchIdentity } from "../../models/torch.server";
 
 export async function loader({ request }) {
@@ -43,9 +49,12 @@ export default function Configuration() {
   const torch = useLoaderData();
   const shopify = useAppBridge();
   const apiTorch = axios.create();
+  const navigate = useNavigate();
 
+  console.log('--tt--', torch)
   let [email, setEmail] = useState('');
   let [password, setPassword] = useState('');
+  let [error, setError] = useState(null);
 
   let handleEmailChange = useCallback(
     (value) => {console.log('--1--', value);setEmail(value)},
@@ -63,8 +72,12 @@ export default function Configuration() {
       "password": password,
       "service": "Shopify"
     })
-    .then((response) => {
-      console.log(response)
+    .then(async (response) => {
+      console.log('--R--', response)
+      const data = {
+        api_key : response.token
+      }
+      //await upsert(data)
     })
     .catch((error) => console.log(error))
 
@@ -75,33 +88,55 @@ export default function Configuration() {
     shopify.modal.show('login-modal')
   }
 
+  const api = useFetcher()
+  useEffect(() => {
+    console.log('--ap--', api)
+    const data = api.data;
+    if (!(api.state !== "idle" && data)) return;
+    
+    if(data.error){
+      setError(data.error)
+    }
+    //navigate("/app/configuration")
+    shopify.modal.hide('login-modal')
+    console.log('--d--', data)
+  }, [ api ]);
+
+  const isLoading = api.state !== "idle";
+
   return (
     <Page
-      divider
-      primaryAction={{ content: "View on your store", disabled: false }}
-      secondaryActions={[
-        {
-          content: "Duplicate",
-          accessibilityLabel: "Secondary action label",
-          onAction: () => alert("Duplicate action"),
-        },
-      ]}>
+      divider>
 
       <Modal
         id="login-modal"
         variant="small">
         
-        <Form>
+        <api.Form action="../../api/torch" method="post">
           <FormLayout>
             <Box
               padding="400">
+
+            { isLoading ? (
+              <Spinner
+                accessibilityLabel="Loading login"
+                hasFocusableParent={false}
+              />
+            ) : (
               <BlockStack
                 gap="400">
+
+                <input type="hidden" name="action" value="LOGIN"/>
+                
+                { error
+                  ? (<InlineError message={error} />)
+                  : null}
 
                 <TextField
                   value    = {email}
                   onChange = {handleEmailChange}
                   label    = "Usuario"
+                  name     = "user"
                   helpText = {
                     <span>
                       Escribe el usuario que tienes en la plataforma de Torch
@@ -114,6 +149,7 @@ export default function Configuration() {
                   onChange = {handlePasswordChange}
                   label    = "Constraseña"
                   type     = "password"
+                  name     = "password"
                   helpText = {
                     <span>
                       Escribe la contraseña que tienes en la plataforma de Torch
@@ -121,14 +157,22 @@ export default function Configuration() {
                   }
                 />
 
+                <InlineStack align="end">
+                  <ButtonGroup>
+                    <Button onClick={() => shopify.modal.hide('login-modal')}>Cancelar</Button>
+                    <Button variant="primary" submit>Conectar</Button>
+                  </ButtonGroup>
+                </InlineStack>
+
               </BlockStack>
+            )}
             </Box>
           </FormLayout>
-        </Form>
+        </api.Form>
 
         <TitleBar title="Conectar con la plataforma Torch">
-          <button variant="primary" onClick={handleSubmit}>Conectar</button>
-          <button onClick={() => shopify.modal.hide('login-modal')}>Cancelar</button>
+          {/*<button variant="primary" onClick={handleSubmit}>Conectar</button>*/}
+          
         </TitleBar>
         
       </Modal>
@@ -150,35 +194,53 @@ export default function Configuration() {
             </BlockStack>
           </Box>
           <Card roundedAbove="sm">
-            { torch ? (
-              <BlockStack gap="400">  
-                <div>
-                  <TextField label="Interjamb style" />
-                  <TextField label="Interjamb ratio" />
-                </div>
-              </BlockStack>
-            ) : (
-              <div>
-                <BlockStack gap="400">
-                  <Text as="h3" variant="headingMd">
-                    Te falta un sólo paso para continuar
-                  </Text>
-                  <Text as="p" variant="bodyMd">
-                    Por favor inicia sesión con Torch para que la aplicación pueda ofrecerte los mejores precios
-                  </Text>
-                </BlockStack>
-                <Box paddingBlockStart="400">
-                  <InlineStack 
-                    align="end">
-                    <Button variant="primary" onClick={openLogin}>Iniciar sesión</Button>
-                  </InlineStack>
+            { isLoading ? (
+              <InlineStack align="center">
+                <Box paddingBlockStart="300">
+                  <Spinner
+                    accessibilityLabel="Loading login"
+                    hasFocusableParent={false}
+                  />
                 </Box>
-              </div>
-            )}
+              </InlineStack>
+            ) : (torch ? (
+                <api.Form action="../../api/torch" method="post">
+                  <input type="hidden" name="action" value="LOGOUT"/>
+                  <Box paddingBlockStart="400">
+                    <Text as="h3" variant="headingMd" alignment="center">
+                      Estás conectado correctamente con la plataforma U-Torch
+                    </Text>
+                  </Box>
+                  <Box paddingBlockStart="400">
+                    <InlineStack 
+                      align="end">
+                      <Button variant="primary" submit>Desconectar</Button>
+                    </InlineStack>
+                  </Box>
+                </api.Form>
+              ) : (
+                <div>
+                  <BlockStack gap="400">
+                    <Text as="h3" variant="headingMd">
+                      Te falta un sólo paso para continuar
+                    </Text>
+                    <Text as="p" variant="bodyMd">
+                      Por favor inicia sesión con Torch para que la aplicación pueda ofrecerte los mejores precios
+                    </Text>
+                  </BlockStack>
+                  <Box paddingBlockStart="400">
+                    <InlineStack 
+                      align="end">
+                      <Button variant="primary" onClick={openLogin}>Iniciar sesión</Button>
+                    </InlineStack>
+                  </Box>
+                </div>
+              ))
+            }
           </Card>
         </InlineGrid>
         {smUp ? <Divider /> : null}
-        <InlineGrid columns={{ xs: "1fr", md: "2fr 5fr" }} gap="400">
+        {/*<InlineGrid columns={{ xs: "1fr", md: "2fr 5fr" }} gap="400">
           <Box
             as="section"
             paddingInlineStart={{ xs: 400, sm: 0 }}
@@ -199,7 +261,7 @@ export default function Configuration() {
               <TextField label="Interjamb ratio" />
             </BlockStack>
           </Card>
-        </InlineGrid>
+        </InlineGrid>*/}
       </BlockStack>
 
     </Page>

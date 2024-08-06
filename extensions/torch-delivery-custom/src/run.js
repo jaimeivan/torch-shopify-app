@@ -17,6 +17,7 @@ const NO_CHANGES = {
  * @returns {FunctionRunResult}
  */
 export function run(input) {
+  console.log('--IN--', input)
   const configuration = JSON.parse(
     input?.deliveryCustomization?.metafield?.value ?? "{}"
   );

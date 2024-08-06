@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@shopify/shopify_function": "0.1.0",
+    "axios": "^1.7.2",
     "javy": "0.1.1"
   }
 }

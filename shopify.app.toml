@@ -3,7 +3,7 @@
 client_id = "1da2b36f4a52e62854645db8cf06a965"
 name = "torch-test-app"
 handle = "torch-test-app"
-application_url = "https://scoring-interview-lands-surgical.trycloudflare.com"
+application_url = "https://latest-journalists-subscribers-meditation.trycloudflare.com"
 embedded = true
 
 [build]
@@ -13,13 +13,13 @@ include_config_on_deploy = true
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "write_products"
+scopes = "write_products,write_shipping"
 
 [auth]
 redirect_urls = [
-  "https://scoring-interview-lands-surgical.trycloudflare.com/auth/callback",
-  "https://scoring-interview-lands-surgical.trycloudflare.com/auth/shopify/callback",
-  "https://scoring-interview-lands-surgical.trycloudflare.com/api/auth/callback"
+  "https://latest-journalists-subscribers-meditation.trycloudflare.com/auth/callback",
+  "https://latest-journalists-subscribers-meditation.trycloudflare.com/auth/shopify/callback",
+  "https://latest-journalists-subscribers-meditation.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
