@@ -1,9 +1,9 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "1da2b36f4a52e62854645db8cf06a965"
-name = "torch-test-app"
-handle = "torch-test-app"
-application_url = "https://latest-journalists-subscribers-meditation.trycloudflare.com"
+name = "u-torch-app"
+handle = "u-torch-app"
+application_url = "https://minimal-sean-desired-brazil.trycloudflare.com"
 embedded = true
 
 [build]
@@ -17,9 +17,9 @@ scopes = "write_products,write_shipping"
 
 [auth]
 redirect_urls = [
-  "https://latest-journalists-subscribers-meditation.trycloudflare.com/auth/callback",
-  "https://latest-journalists-subscribers-meditation.trycloudflare.com/auth/shopify/callback",
-  "https://latest-journalists-subscribers-meditation.trycloudflare.com/api/auth/callback"
+  "https://minimal-sean-desired-brazil.trycloudflare.com/auth/callback",
+  "https://minimal-sean-desired-brazil.trycloudflare.com/auth/shopify/callback",
+  "https://minimal-sean-desired-brazil.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
