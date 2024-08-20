@@ -135,11 +135,11 @@ export default function Configuration() {
                 <TextField
                   value    = {email}
                   onChange = {handleEmailChange}
-                  label    = "Usuario"
+                  label    = "User"
                   name     = "user"
                   helpText = {
                     <span>
-                      Escribe el usuario que tienes en la plataforma de Torch
+                      Enter the username you have on the U-Torch platform
                     </span>
                   }
                 />
@@ -147,20 +147,20 @@ export default function Configuration() {
                 <TextField
                   value    = {password}
                   onChange = {handlePasswordChange}
-                  label    = "Constraseña"
+                  label    = "Password"
                   type     = "password"
                   name     = "password"
                   helpText = {
                     <span>
-                      Escribe la contraseña que tienes en la plataforma de Torch
+                      Enter the password you have on the U-Torch platform
                     </span>
                   }
                 />
 
                 <InlineStack align="end">
                   <ButtonGroup>
-                    <Button onClick={() => shopify.modal.hide('login-modal')}>Cancelar</Button>
-                    <Button variant="primary" submit>Conectar</Button>
+                    <Button onClick={() => shopify.modal.hide('login-modal')}>Cancel</Button>
+                    <Button variant="primary" submit>Connect</Button>
                   </ButtonGroup>
                 </InlineStack>
 
@@ -170,7 +170,7 @@ export default function Configuration() {
           </FormLayout>
         </api.Form>
 
-        <TitleBar title="Conectar con la plataforma Torch">
+        <TitleBar title="Connect with the Torch platform">
           {/*<button variant="primary" onClick={handleSubmit}>Conectar</button>*/}
           
         </TitleBar>
@@ -189,7 +189,7 @@ export default function Configuration() {
                 API KEY
               </Text>
               <Text as="p" variant="bodyMd">
-                Conecta tu tienda Shopify con la plataforma Torch para que muestre los mejores precios en envíos
+                Connect your Shopify store to the U-Torch platform to display the best shipping prices
               </Text>
             </BlockStack>
           </Box>
@@ -208,13 +208,13 @@ export default function Configuration() {
                   <input type="hidden" name="action" value="LOGOUT"/>
                   <Box paddingBlockStart="400">
                     <Text as="h3" variant="headingMd" alignment="center">
-                      Estás conectado correctamente con la plataforma U-Torch
+                      You are successfully connected to the U-Torch platform
                     </Text>
                   </Box>
                   <Box paddingBlockStart="400">
                     <InlineStack 
                       align="end">
-                      <Button variant="primary" submit>Desconectar</Button>
+                      <Button variant="primary" submit>Disconnect</Button>
                     </InlineStack>
                   </Box>
                 </api.Form>
@@ -222,16 +222,16 @@ export default function Configuration() {
                 <div>
                   <BlockStack gap="400">
                     <Text as="h3" variant="headingMd">
-                      Te falta un sólo paso para continuar
+                      You are just one step away from continuing.
                     </Text>
                     <Text as="p" variant="bodyMd">
-                      Por favor inicia sesión con Torch para que la aplicación pueda ofrecerte los mejores precios
+                      Please log in with U-Torch so the app can offer you the best prices.
                     </Text>
                   </BlockStack>
                   <Box paddingBlockStart="400">
                     <InlineStack 
                       align="end">
-                      <Button variant="primary" onClick={openLogin}>Iniciar sesión</Button>
+                      <Button variant="primary" onClick={openLogin}>Login</Button>
                     </InlineStack>
                   </Box>
                 </div>

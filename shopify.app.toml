@@ -3,7 +3,7 @@
 client_id = "1da2b36f4a52e62854645db8cf06a965"
 name = "u-torch-app"
 handle = "u-torch-app"
-application_url = "https://gentle-replaced-advise-breed.trycloudflare.com"
+application_url = "https://winner-thinkpad-toys-ball.trycloudflare.com"
 embedded = true
 
 [build]
@@ -17,9 +17,9 @@ scopes = "read_customers,read_orders,write_products,write_shipping"
 
 [auth]
 redirect_urls = [
-  "https://gentle-replaced-advise-breed.trycloudflare.com/auth/callback",
-  "https://gentle-replaced-advise-breed.trycloudflare.com/auth/shopify/callback",
-  "https://gentle-replaced-advise-breed.trycloudflare.com/api/auth/callback"
+  "https://winner-thinkpad-toys-ball.trycloudflare.com/auth/callback",
+  "https://winner-thinkpad-toys-ball.trycloudflare.com/auth/shopify/callback",
+  "https://winner-thinkpad-toys-ball.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
