@@ -43,8 +43,7 @@ export default function App() {
         {/*<Link to="/app" rel="home">
           Home
         </Link>*/}
-        {/*<Link to="/app/additional">Pedidos con envío</Link>*/}
-        <Link to="/app/configuration">Configuración</Link>
+        <Link to="/app/configuration">Configuration</Link>
       </NavMenu>
       <Outlet />
     </AppProvider>

@@ -3,7 +3,7 @@
 client_id = "1da2b36f4a52e62854645db8cf06a965"
 name = "u-torch-app"
 handle = "u-torch-app"
-application_url = "https://minimal-sean-desired-brazil.trycloudflare.com"
+application_url = "https://gentle-replaced-advise-breed.trycloudflare.com"
 embedded = true
 
 [build]
@@ -13,13 +13,13 @@ include_config_on_deploy = true
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "write_products,write_shipping"
+scopes = "read_customers,read_orders,write_products,write_shipping"
 
 [auth]
 redirect_urls = [
-  "https://minimal-sean-desired-brazil.trycloudflare.com/auth/callback",
-  "https://minimal-sean-desired-brazil.trycloudflare.com/auth/shopify/callback",
-  "https://minimal-sean-desired-brazil.trycloudflare.com/api/auth/callback"
+  "https://gentle-replaced-advise-breed.trycloudflare.com/auth/callback",
+  "https://gentle-replaced-advise-breed.trycloudflare.com/auth/shopify/callback",
+  "https://gentle-replaced-advise-breed.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
