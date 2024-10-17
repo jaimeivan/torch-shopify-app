@@ -84,8 +84,12 @@ export default function Configuration() {
   }, [email, password]);
 
   const openLogin = async () => {
-    console.log('try-open')
-    shopify.modal.show('login-modal')
+    const shop = await useAppBridge();
+    console.log('try-open', shop.modal)
+    setError('')
+    setEmail('')
+    setPassword('')
+    shop.modal.show('login-modal')
   }
 
   const api = useFetcher()
@@ -97,8 +101,10 @@ export default function Configuration() {
     if(data.error){
       setError(data.error)
     }
-    //navigate("/app/configuration")
-    shopify.modal.hide('login-modal')
+    else {
+      //navigate("/app/configuration")
+      shopify.modal.hide('login-modal')
+    }
     console.log('--d--', data)
   }, [ api ]);
 

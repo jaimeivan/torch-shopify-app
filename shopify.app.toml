@@ -3,11 +3,11 @@
 client_id = "1da2b36f4a52e62854645db8cf06a965"
 name = "u-torch-app"
 handle = "u-torch-app"
-application_url = "https://winner-thinkpad-toys-ball.trycloudflare.com"
+application_url = "https://u-torch-app-ecom-sp-419293472902.us-central1.run.app"
 embedded = true
 
 [build]
-automatically_update_urls_on_dev = true
+automatically_update_urls_on_dev = false
 dev_store_url = "torch-shop-test-01.myshopify.com"
 include_config_on_deploy = true
 
@@ -17,17 +17,13 @@ scopes = "read_customers,read_orders,write_products,write_shipping"
 
 [auth]
 redirect_urls = [
-  "https://winner-thinkpad-toys-ball.trycloudflare.com/auth/callback",
-  "https://winner-thinkpad-toys-ball.trycloudflare.com/auth/shopify/callback",
-  "https://winner-thinkpad-toys-ball.trycloudflare.com/api/auth/callback"
+  "https://u-torch-app-ecom-sp-419293472902.us-central1.run.app/auth/callback",
+  "https://u-torch-app-ecom-sp-419293472902.us-central1.run.app/auth/shopify/callback",
+  "https://u-torch-app-ecom-sp-419293472902.us-central1.run.app/api/auth/callback"
 ]
 
 [webhooks]
 api_version = "2024-07"
-
-  [[webhooks.subscriptions]]
-  topics = [ "app/uninstalled" ]
-  uri = "/webhooks"
 
 [pos]
 embedded = false
