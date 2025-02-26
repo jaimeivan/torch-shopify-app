@@ -13,7 +13,7 @@ include_config_on_deploy = true
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "read_customers,read_orders,write_products,write_shipping"
+scopes = "read_customers,read_orders,read_shipping,read_assigned_fulfillment_orders,write_assigned_fulfillment_orders,read_merchant_managed_fulfillment_orders,write_merchant_managed_fulfillment_orders,write_orders,write_products,write_shipping,read_third_party_fulfillment_orders,write_third_party_fulfillment_orders,fulfill_and_ship_orders"
 
 [auth]
 redirect_urls = [

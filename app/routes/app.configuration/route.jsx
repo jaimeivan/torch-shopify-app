@@ -66,8 +66,9 @@ export default function Configuration() {
   );
 
   const handleSubmit = useCallback(() => {
-    console.log('--S--', email, password)
-    apiTorch.post('https://api-qa.u-torch.com/v1/login', {
+    // console.log('--S--', email, password)
+    //apiTorch.post('https://api-qa.u-torch.com/v1/login', {
+    apiTorch.post('https://api.u-torch.com/v1/login', {
       "email": email,
       "password": password,
       "service": "Shopify"
@@ -84,12 +85,8 @@ export default function Configuration() {
   }, [email, password]);
 
   const openLogin = async () => {
-    const shop = await useAppBridge();
-    console.log('try-open', shop.modal)
-    setError('')
-    setEmail('')
-    setPassword('')
-    shop.modal.show('login-modal')
+    console.log('try-open')
+    shopify.modal.show('login-modal')
   }
 
   const api = useFetcher()
@@ -101,10 +98,8 @@ export default function Configuration() {
     if(data.error){
       setError(data.error)
     }
-    else {
-      //navigate("/app/configuration")
-      shopify.modal.hide('login-modal')
-    }
+    //navigate("/app/configuration")
+    shopify.modal.hide('login-modal')
     console.log('--d--', data)
   }, [ api ]);
 
@@ -141,11 +136,11 @@ export default function Configuration() {
                 <TextField
                   value    = {email}
                   onChange = {handleEmailChange}
-                  label    = "User"
+                  label    = "Usuario"
                   name     = "user"
                   helpText = {
                     <span>
-                      Enter the username you have on the U-Torch platform
+                      Escribe el usuario que tienes en la plataforma de Torch
                     </span>
                   }
                 />
@@ -153,20 +148,20 @@ export default function Configuration() {
                 <TextField
                   value    = {password}
                   onChange = {handlePasswordChange}
-                  label    = "Password"
+                  label    = "Constraseña"
                   type     = "password"
                   name     = "password"
                   helpText = {
                     <span>
-                      Enter the password you have on the U-Torch platform
+                      Escribe la contraseña que tienes en la plataforma de Torch
                     </span>
                   }
                 />
 
                 <InlineStack align="end">
                   <ButtonGroup>
-                    <Button onClick={() => shopify.modal.hide('login-modal')}>Cancel</Button>
-                    <Button variant="primary" submit>Connect</Button>
+                    <Button onClick={() => shopify.modal.hide('login-modal')}>Cancelar</Button>
+                    <Button variant="primary" submit>Conectar</Button>
                   </ButtonGroup>
                 </InlineStack>
 
@@ -176,7 +171,7 @@ export default function Configuration() {
           </FormLayout>
         </api.Form>
 
-        <TitleBar title="Connect with the Torch platform">
+        <TitleBar title="Conectar con la plataforma Torch">
           {/*<button variant="primary" onClick={handleSubmit}>Conectar</button>*/}
           
         </TitleBar>
@@ -195,7 +190,7 @@ export default function Configuration() {
                 API KEY
               </Text>
               <Text as="p" variant="bodyMd">
-                Connect your Shopify store to the U-Torch platform to display the best shipping prices
+                Conecta tu tienda Shopify con la plataforma Torch para que muestre los mejores precios en envíos
               </Text>
             </BlockStack>
           </Box>
@@ -214,13 +209,13 @@ export default function Configuration() {
                   <input type="hidden" name="action" value="LOGOUT"/>
                   <Box paddingBlockStart="400">
                     <Text as="h3" variant="headingMd" alignment="center">
-                      You are successfully connected to the U-Torch platform
+                      Estás conectado correctamente con la plataforma U-Torch
                     </Text>
                   </Box>
                   <Box paddingBlockStart="400">
                     <InlineStack 
                       align="end">
-                      <Button variant="primary" submit>Disconnect</Button>
+                      <Button variant="primary" submit>Desconectar</Button>
                     </InlineStack>
                   </Box>
                 </api.Form>
@@ -228,16 +223,16 @@ export default function Configuration() {
                 <div>
                   <BlockStack gap="400">
                     <Text as="h3" variant="headingMd">
-                      You are just one step away from continuing.
+                      Te falta un sólo paso para continuar
                     </Text>
                     <Text as="p" variant="bodyMd">
-                      Please log in with U-Torch so the app can offer you the best prices.
+                      Por favor inicia sesión con Torch para que la aplicación pueda ofrecerte los mejores precios
                     </Text>
                   </BlockStack>
                   <Box paddingBlockStart="400">
                     <InlineStack 
                       align="end">
-                      <Button variant="primary" onClick={openLogin}>Login</Button>
+                      <Button variant="primary" onClick={openLogin}>Iniciar sesión</Button>
                     </InlineStack>
                   </Box>
                 </div>
