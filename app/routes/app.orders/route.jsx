@@ -75,16 +75,16 @@ export async function loader({ request }) {
       `,
     );
     response = await response.json();
-    console.log('--R--', JSON.stringify(response.data,null,2))
+    console.log('--response.data--', response.data)
 	}
 	catch(error){
-		console.log('--err02--', error)
+		console.log('--graphql-error--', error)
 	}
   
   const ordersTorch = response.data.orders.nodes.filter(
     order => {
-      // console.log('--d--', order)
-      return order.shippingLine.source.includes("Torch")
+      console.log('--order--', order)
+      return order.shippingLine && order.shippingLine.source.includes("Torch")
     }
   );
 
